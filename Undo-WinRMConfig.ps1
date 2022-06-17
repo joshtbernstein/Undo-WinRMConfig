@@ -45,7 +45,7 @@ Param (
   [switch]$Version
 )
 
-$ThisScriptVersion = '1.2.0'
+$ThisScriptVersion = '1.3.0'
 
 If ($version)
 {  
