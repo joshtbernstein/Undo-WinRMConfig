@@ -90,6 +90,9 @@ Function Setup-Undo {
     netsh advfirewall firewall set rule name="$($FirewallRuleName.Name)" new enable=No
   }
 
+  Write-Host "Deleting the certificate bound to the HTTPS listener" 
+  Get-ChildItem "Cert:\LocalMachine\My\$((Get-WSManInstance -ResourceURI winrm/config/listener -SelectorSet @{Address="*";Transport="https"}).CertificateThumbprint)" | Remove-Item
+
   Write-Host "Undoing changes for Enable-PSRemoting, Enable-WSManCredSSP and winrm configuration commands"
 
   Write-Host "Remove LocalAccountTokenFilterPolicy added by winrm configuration"
